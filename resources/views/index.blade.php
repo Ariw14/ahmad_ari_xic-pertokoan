@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
 
-    -- <!-- AlpineJS -->
+    <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
@@ -157,23 +157,24 @@
                 </div>
 
                 <div class="w-full mt-12">
-                    <p class="text-xl pb-3 flex items-center">
-                        <i class="fas fa-list mr-3"></i> Latest Product
-                    </p>
+                    <div class="flex justify-between">
+                        <p class="text-xl pb-3 flex items-center">
+                            <i class="fas fa-list mr-3"></i> Latest Product
+                        </p>
+                        <div class="">
+                            <form method="GET" action="{{ route('data.filter') }}">
+                                <select name="id_toko" id="" class="m-2 border rounded-md p-2">
+                                    <option value="" class="text-center">-- Pilih Toko --</option>
+                                    @foreach ($toko as $d)
+                                        <option value="{{ $d->id }}" class="">{{ $d->nama_toko }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                {{-- <button type="submit" class="bg-gray-500 p-1 rounded-md text-white">SUBMIT</button> --}}
+                            </form>
+                        </div>
+                    </div>
                     <div class="bg-white overflow-auto">
-                        {{-- <form method="GET" action="{{ route('alumni.filter', $angkatan[0]->angktn) }}">
-                            <select name="angkatan_id" id="angkatan_id" onchange="this.form.submit()"
-                                class="bg-transparent text-white mr-2 hover:text-red-500 hover:duration-500">
-                                <option value="" disabled {{ request('angkatan_id') ? '' : 'selected' }}>Pilih
-                                    Angkatan</option>
-                                @foreach ($angkatanfilter as $a)
-                                    <option class="text-gray-800" value="{{ $a->angktn }}"
-                                        {{ request('angkatan_id') == $a->angktn ? 'selected' : '' }}>
-                                        Angkatan {{ $a->angktn }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </form> --}}
                         <table class="min-w-full bg-white">
                             <thead class="bg-gray-800 text-white">
                                 <tr>

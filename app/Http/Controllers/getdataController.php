@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductModel;
 use App\Models\TokoModel;
 use Illuminate\Http\Request;
+use Laravel\Prompts\Support\Result;
 
 class getdataController extends Controller
 {
@@ -18,15 +19,20 @@ class getdataController extends Controller
         return view('index', compact('totalproduct', 'totaltoko', 'product', 'toko'));
     }
 
-    public function filterdata(){
-        // $product = ProductModel::select('id_toko')->distinct()->get();
-        // $angkatanfilter = ProductModel::all();
+    public function filterdata(Request $request){
+        $tokoId = $request->query('id_toko');
 
-        // $alumnis = Alumni::query();
-        
+        $toko = TokoModel::with('produk')->findOrFail($tokoId);
 
-        // if ($angkatan_id) {
-        //     $alumnis->where('angkatan_id', $angkatan_id);
-        // }
+        $product = ProductModel::latest()->paginate(5);
+        $producttotal = ProductModel::all();
+        $toko = TokoModel::latest()->paginate(5);
+        $tokototal = TokoModel::all();
+        $totalproduct = $producttotal->count();
+        $totaltoko = $tokototal->count();
+
+        // $product = $toko->produk;
+
+        return view('index', compact('toko', 'totalproduct', 'totaltoko', 'product', 'toko'));
     }   
 }

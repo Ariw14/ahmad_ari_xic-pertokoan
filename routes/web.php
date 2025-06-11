@@ -10,6 +10,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 route::get('/', [getdataController::class, 'index'])->name('index');
-// route::get('/', [getdataController::class, 'filterdata'])->name('filter.data');
+route::get('/filter', [getdataController::class, 'filterdata'])->name('data.filter');
 route::resource('/product', productController::class);
 route::resource('/toko', tokoController::class);
